@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bobbin Runtime - Sign In</title>
+  <style>
+    body { font-family: system-ui, sans-serif; display: grid; place-items: center; height: 100vh; margin: 0; background: #f4f4f9; }
+    form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 320px; display: flex; flex-direction: column; gap: 1rem; }
+    input, button { padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #111; color: white; border: none; cursor: pointer; font-weight: bold; }
+    small { color: #666; text-align: center; }
+  </style>
+</head>
+<body>
+  <form action="/login" method="POST">
+    <h2>Bobbin Runtime</h2>
+    <input type="text" name="username" value="developer" />
+    <button type="submit">Sign In to single-spa Hub</button>
+    <small>Direct login enabled</small>
+  </form>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bobbin single-spa Root Hub</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "single-spa": "https://esm.sh",
+        "@bobbin/home-mfe": "/mfes/home/main.js"
+      }
+    }
+  </script>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f4f4f9; color: #111; }
+    header { background: #111; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    nav { display: flex; gap: 1rem; }
+    nav a { color: #ddd; text-decoration: none; font-weight: 500; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; }
+    nav a:hover { background: #333; color: #fff; }
+    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    .mfe-slot { background: #fff; border: 2px dashed #cbd5e1; border-radius: 8px; padding: 1.5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>Bobbin Runtime</strong> &mdash; single-spa Root Hub</div>
+    <nav>
+      <a href="/hub" data-spa-link>@bobbin/home-mfe</a>
+      <a href="/logout" style="color: #f87171;">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div id="single-spa-application:@bobbin/home-mfe" class="mfe-slot"></div>
+  </div>
+
+  <script type="module">
+    import { registerApplication, start, navigateToUrl } from 'single-spa';
+
+    document.querySelectorAll('[data-spa-link]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateToUrl(e.currentTarget.getAttribute('href'));
+      });
+    });
+
+    registerApplication({
+      name: '@bobbin/home-mfe',
+      app: () => import('@bobbin/home-mfe'),
+      activeWhen: (location) => location.pathname.startsWith('/hub')
+    });
+
+    start({ urlRerouteOnly: true });
+  </script>
+</body>
+</html>
